@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Post;
+use App\Peserta;
 
 class Konfirmasi extends Model
 {
@@ -11,6 +12,10 @@ class Konfirmasi extends Model
     protected $guarded = [];
 
     public function posting(){
-    	return $this->belongsTo('Post');
+    	return $this->belongsTo('Posting');
+    }
+
+    public function peserta(){
+    	return $this->belongsTo('Peserta');
     }
 }

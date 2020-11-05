@@ -10,40 +10,42 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// - - - - - - - - - - -   USER   - - - - - - - - - - -//
 Route::get('/', function () {
 	$data = App\Posting::take(1)->orderBy('id', 'DESC')->get();
     return view('pages.front.home', ['data'=>$data]);
 });
-Route::post('/konfirmasi', 'konfirController@store2');
+//konfirmasi
+Route::post('/konfirmasi', 'konfirController@store');
 
+//pendaftaran
 Route::get('/pendaftaran', 'AuthController@register');
 Route::post('/pendaftaran', 'AuthController@postregister');
 
+//qrcode_cek
 Route::get('/qrcodecek', 'qrcodeController@index');
 Route::post('/qrcodecek/cek', 'qrcodeController@store');
 Route::get('/qrcodecek/tampil/{id}', 'qrcodeController@show')->middleware('auth');
 
+
+// - - - - - - - - -   ADMINISTRATOR   - - - - - - - - - - -//
 Route::get('/administrator', 'AdminController@administrator');
-
+//data peserta
 route::get('/datapeserta', 'pesertaController@index');
-
-route::post('/datapeserta/store2', 'profileController@store');
-route::post('/datapeserta/store', 'pesertaController@store');
 
 route::post('/datapeserta/{id}/update', 'pesertaController@update');
 route::get('/datapeserta/{id}/delete', 'pesertaController@destroy');
 
+//data konfirmasi
 route::get('/datakonfirmasi', 'konfirController@index');
-route::get('/datakonfirmasi/create', 'konfirController@create');
-route::post('/datakonfirmasi/store', 'konfirController@store');
-route::post('/datakonfirmasi/{id}/update', 'konfirController@update');
-route::post('/datakonfirmasi/{id}/delete', 'konfirController@destroy');
+route::get('/datakonfirmasi/sesi', 'konfirController@show');
 
+//data presensi
 route::get('/datapresensi', 'presensiController@index');
 route::get('/datapresensi/create', 'presensiController@create');
 route::get('/datapresensi/{id}/delete', 'presensiController@destroy');
 
+//posting info kajian
 route::get('/posting', 'postingController@index');
 route::post('/posting', 'postingController@create');
 

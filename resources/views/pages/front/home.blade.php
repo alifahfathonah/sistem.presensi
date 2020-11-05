@@ -13,7 +13,7 @@
 					</div>
 					
 					<div class="total-work-process d-flex justify-content-around align-items-left">		
-						<form id="myForm" action="/datakonfirmasi/store" method="post" class="contact-form">
+						<form id="myForm" action="/konfirmasi" method="post" class="contact-form">
 						@csrf
 						<div class="row justify-content-center">
 							@foreach($data as $post)

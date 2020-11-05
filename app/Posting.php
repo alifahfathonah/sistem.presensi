@@ -3,14 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Konfirmasi;
+use App\Peserta;
 
 class Posting extends Model
 {
     protected $table = 'post';
     protected $guarded = [];
 
-    public function konfirm(){
-    	return $this->hasOne('Konfirmasi', 'konfirmasi_id');
+    public function peserta(){
+    	return $this->belongsToMany('Peserta');
     }
 }

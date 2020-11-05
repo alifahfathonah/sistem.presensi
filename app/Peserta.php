@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Konfirmasi;
+use App\Posting;
 
 class Peserta extends Model
 {
@@ -22,6 +22,6 @@ class Peserta extends Model
     //}
 
     public function konfirm(){
-    	return $this->hasMany('Konfirmasi');
+    	return $this->belongsToMany('Posting');
     }
 }

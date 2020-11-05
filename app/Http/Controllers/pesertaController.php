@@ -17,8 +17,8 @@ class pesertaController extends Controller
      */
     public function index()
     {
-        $data_peserta = Peserta::all();
-        return view('pages.back.data-peserta',['data_peserta' => $data_peserta]);
+        $data = Peserta::all();
+        return view('pages.back.data-peserta',['data' => $data]);
     }
 
 

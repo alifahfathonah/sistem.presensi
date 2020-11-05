@@ -12,8 +12,8 @@
 */
 // - - - - - - - - - - -   USER   - - - - - - - - - - -//
 Route::get('/', function () {
-	$data = App\Posting::take(1)->orderBy('id', 'DESC')->get();
-    return view('pages.front.home', ['data'=>$data]);
+    $data = App\Posting::take(1)->orderBy('id', 'DESC')->get();
+    return view('pages.front.home', ['data' => $data]);
 });
 //konfirmasi
 Route::post('/konfirmasi', 'konfirController@store');

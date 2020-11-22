@@ -7,76 +7,84 @@
           <div class="col-sm-6">
             <h1>Dashboard</h1>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/administrator">Home</a></li>              
-            </ol>
-          </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
-    <div class="container-fluid">
-      
-      <!-- Small boxes (Stat box) -->
+    <div class="container-fluid row">
+      <div class="col">
+      <!-- Small boxes (Stat box) -->        
         <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
-
-                <p>New Orders</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>          
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-11">
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3>{{ $sum }} orang</h3>
 
-                <p>User Registrations</p>
+                <p>akan hadir</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="ion ion-person"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/datakonfirmasi" class="small-box-footer">Data Konfirmasi <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>          
           <!-- ./col -->
-        </div>
-
-    </div>
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Title</h3>
-
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
+        </div> 
+        <div class="row">
+          <div class="col-lg-11">            
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Tabel Data Konfirmasi Peserta</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body"> 
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Nama</th>
+                      <th>Jumlah</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($data2 as $konfir)
+                  <tr>
+                    <td>{{ $konfir->kode_user}}</td>
+                    <td>{{ $konfir->name}}</td>
+                    <td>{{ $konfir->jml}}</td>
+                  </tr>
+                  @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
           </div>
+        </div>       
+      </div>
+
+      <!-- Default box -->
+      @foreach($data as $postingan)
+      <div class="card col-lg-7">
+        <div class="card-header flex">
+          <h3 class="card-title">{{ $postingan->sesi }}</h3>
+          <span class="badge badge-warning float-right">Terbaru</span></h5>
         </div>
-        <div class="card-body">
-          Start creating your amazing application!
+        <!-- /.card-header -->
+        <div class="card-body mt-10">
+          <img width="555px" src="{{ asset('storage/' .$postingan->gambar) }}" alt="Product Image">
         </div>
         <!-- /.card-body -->
-        <div class="card-footer">
-          Footer
+        <div class="card-footer text-center">
+          <a href="/posting" class="uppercase">Selebihnya</a>
         </div>
-        <!-- /.card-footer-->
+        <!-- /.card-footer -->
       </div>
+      @endforeach
       <!-- /.card -->
+    </div>
 
     </section>
     <!-- /.content -->

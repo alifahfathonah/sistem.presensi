@@ -25,7 +25,7 @@ Route::post('/pendaftaran', 'AuthController@postregister');
 //qrcode_cek
 Route::get('/qrcodecek', 'qrcodeController@index');
 Route::post('/qrcodecek/cek', 'qrcodeController@store');
-Route::get('/qrcodecek/tampil/{id}', 'qrcodeController@show')->middleware('auth');
+Route::get('/qrcodecek/tampil/{id}', 'qrcodeController@show');
 
 
 // - - - - - - - - -   ADMINISTRATOR   - - - - - - - - - - -//
@@ -48,6 +48,14 @@ route::get('/datapresensi/{id}/delete', 'presensiController@destroy');
 //posting info kajian
 route::get('/posting', 'postingController@index');
 route::post('/posting', 'postingController@create');
+
+//menu presensi
+route::get('/presensi', 'presensiController@presensi');
+route::get('/presensikajian', 'presensiController@presensikajian');
+route::post('/presensi', 'presensiController@store');
+
+
+
 
 Auth::routes();
 

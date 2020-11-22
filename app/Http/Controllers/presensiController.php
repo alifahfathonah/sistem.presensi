@@ -81,4 +81,12 @@ class presensiController extends Controller
     {
         //
     }
+
+    public function presensi(){
+        return view('pages.front.presensi');
+    }
+
+    public function presensikajian(){
+        return view('pages.back.presensi-kajian');
+    }
 }

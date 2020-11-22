@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Peserta;
-use App\User;
-
 
 class pesertaController extends Controller
 {

@@ -8,7 +8,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
                             <div class="section-title text-center">
-                                <h2>Cek QRCode</h2>                             
+                                <h2>Login</h2>                             
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                                 </div>
                                                                 
                             </div>                                
-                                <button name="kirim" class="primary-btn submit-btn d-inline-flex align-items-center mt-20 mr-20"><span class="mr-10">Cek</span><span class="lnr lnr-arrow-right"></span></button>
+                                <button name="kirim" class="primary-btn submit-btn d-inline-flex align-items-center mt-20 mr-20"><span class="mr-10">masuk</span><span class="lnr lnr-arrow-right"></span></button>
                         </div>
                         <div class="alert-msg"></div>       
                     </div>

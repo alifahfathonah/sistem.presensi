@@ -85,7 +85,9 @@ class konfirController extends Controller
                     ->JOIN('post', 'rekap_konfirmasi.konfirmasi_id', '=', 'post.id')
                     ->SELECT('rekap_konfirmasi.*', 'users.*', 'post.*')
                     ->WHERE('post.id', '=', $id)->get();
-        return view('pages.back.data-konfirmasi', ['data'=>$data, 'sesi'=>$sesi, 'id'=>$id]);
+        $sum = Konfirmasi::where('konfirmasi_id', $id)->sum('jml');
+
+        return view('pages.back.data-konfirmasi', ['data'=>$data, 'sesi'=>$sesi, 'id'=>$id, 'sum'=>$sum]);
     }
 
     /**

@@ -44,10 +44,10 @@
 
 								<div id="cnav" class="main-menubar d-flex align-items-center">
 									<nav class="hide">
-										<a href="https://bit.ly/chanel-mt-albarkah">YouTube</a>
-										<a href="https://docs.google.com/forms/d/e/1FAIpQLSfTN-tLQijMCW9-ac4RGYAGhhAMinUDq3iIO1koVYnl7etKTw/viewform">Feedback</a>
-										<a href="https://maps.app.goo.gl/PPWSYHNLrCe5b3wx8">Lokasi</a>
-										<a href="/qrcodecek/tampil/{id}">Cek QRCode</a>
+										<a href="https://bit.ly/chanel-mt-albarkah" style="color: black">YouTube</a>
+										<a href="https://docs.google.com/forms/d/e/1FAIpQLSfTN-tLQijMCW9-ac4RGYAGhhAMinUDq3iIO1koVYnl7etKTw/viewform" style="color: black">Feedback</a>
+										<a href="https://maps.app.goo.gl/PPWSYHNLrCe5b3wx8" style="color: black">Lokasi</a>
+										<a href="/presensi" style="color: black">Presensi</a>
 									</nav>
 									<div class="menu-bar"><span class="lnr lnr-menu"></span></div>
 								</div>
@@ -72,16 +72,7 @@
 				<footer>
 					<div class="container">
 						<div class="footer-content d-flex justify-content-between align-items-center flex-wrap">
-							<div class="logo">
-								<a href="index.html"><img src="img/logo.png" alt=""></a>
-							</div>
-							<div class="copy-right-text">Copyright &copy; 2017  |  All rights reserved to <a href="#">Dinomuz inc.</a> Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></div>
-							<div class="footer-social">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-dribbble"></i></a>
-								<a href="#"><i class="fa fa-behance"></i></a>
-							</div>
+							
 						</div>
 					</div>
 				</footer>
@@ -127,6 +118,7 @@
 		<script src="admin/dist/js/demo.js"></script>
 		<!-- SweetAlert2 -->
 		<script src="admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+		
 		<!-- Page script -->
 		<script>
 		  $(function () {
@@ -211,7 +203,7 @@
 			            $('#show_hide_password i').addClass( "fa-eye" );
 			        }
 			    });
-			});
+			});		  
 		</script>
 	</body>
 </html>

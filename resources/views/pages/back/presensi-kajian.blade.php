@@ -15,7 +15,7 @@
     <section class="content">
       <div class="container-fluid">        
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-7">
             <div class="card">        
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
@@ -24,40 +24,38 @@
                     <tr>
                       <th>ID</th>
                       <th>Nama</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($data as $a)
                     <tr>
-                      <td>183</td>
-                      <td>John Doe</td>
+                      <td>{{ $a->kode_user }}</td>
+                      <td>{{ $a->name }}</td>
+                      <td>{{ $a->created_at }}</td>
                     </tr>                    
+                    @endforeach
                   </tbody>
                 </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
+              </div>              
+            </div>              
           </div>
-          <div class="col-md-7">
-            <!-- table 1 -->
+          <div class="col-md-5">            
             <div class="card">
-              <!-- /.card-header -->
-              <div class="card-body"> 
-                <div class="card-body mt-10">
-                  <?php 
-                    include "phpqrcode/qrlib.php";
-                    $qrcode = "/presensi/store";
-                    QRcode::png($qrcode);
-                  ?>
-                </div>
-                <!-- /.card-body -->
+              <div class="card-header flex">
+                <h3 class="card-title">Akses QRCode</h3>
               </div>
-              <!-- /.card-body -->
+              <div class="card-body">
+                <a href="/presensikajian/qrcode" target="_blank" class="btn btn-primary btn-block">Lihat</a>
+              </div>
             </div>
-              <!-- /.card -->
           </div>        
         </div>
       </div>
-      
+        
     </section>
+    <script>
+      
+    </script>
     <!-- /.content -->
 @endsection

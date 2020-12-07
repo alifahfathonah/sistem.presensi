@@ -17,9 +17,10 @@ class CreatePresensiTable extends Migration
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('user_id');
+            $table->BigInteger('tanda')->unique()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('sesi_id');
-            $table->foreign('sesi_id')->references('id')->on('sesi_presensi');
+            $table->foreign('sesi_id')->references('id')->on('post');
             $table->timestamps();
         });
     }

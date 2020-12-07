@@ -19,9 +19,9 @@
   <link rel="stylesheet" href="/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- SweetAlert2 -->
-  <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link rel="stylesheet" href="/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
-  <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+  <link rel="stylesheet" href="/admin/plugins/toastr/toastr.min.css">
   <style type="text/css"></style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -37,7 +37,13 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="/administrator" class="nav-link">Home</a>
       </li>
-    </ul>    
+    </ul> 
+
+    <div class="navbar-nav ml-auto">
+      <li class="nav-item d-none d-sm-inline-block">
+        <a onclick="logoutModal()" data-toggle="modal" class="nav-link"><span class="fas fa-power-off"></span> Logout</a>
+      </li>
+    </div>   
   </nav>
   <!-- /.navbar -->
 
@@ -54,7 +60,14 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="/admin/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="/administrator/profile/{{auth()->user()->id}}" class="d-block">{{auth()->user()->name}}</a>
+        </div>
+      </div>
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -106,12 +119,19 @@
             </a>            
           </li>
           <li class="nav-item has-treeview">
-            <a href="/presensikajian" class="nav-link {{'presensi' == Request()->path() ? 'active' : ''}}">
+            <a href="/presensikajian" class="nav-link {{'presensikajian' == Request()->path() ? 'active' : ''}}">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Presensi Kajian
               </p>
             </a>            
+          </li>
+          <li class="nav-header">ADMIN</li>
+          <li class="nav-item">
+            <a href="/data-admin" class="nav-link {{'data-admin' == Request()->path() ? 'active' : ''}}">
+              <i class="nav-icon far fa-circle text-danger"></i>
+              <p class="text">Data Admin</p>
+            </a>
           </li>
       </nav>
       <!-- /.sidebar-menu -->
@@ -136,6 +156,29 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+<div class="modal fade" id="logout">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Tunggu!</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Yakin ingin keluar?&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button a type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+        <a id="logoutLink" type="button" class="btn btn-primary">Iya</a>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 <!-- jQuery -->
 <script src="/admin/plugins/jquery/jquery.min.js"></script>
@@ -164,9 +207,9 @@
 <script src="admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <!-- SweetAlert2 -->
-<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
-<script src="../../plugins/toastr/toastr.min.js"></script>
+<script src="/admin/plugins/toastr/toastr.min.js"></script>
 <!-- Page script -->
 <script>
   $(function () {
@@ -203,9 +246,9 @@
     });
     $('#example2').DataTable({
       "paging": true,
-      "lengthChange": false,
+      "lengthChange": true,
       "searching": false,
-      "ordering": true,
+      "ordering": false,
       "info": true,
       "autoWidth": false,
       "responsive": true,
@@ -259,7 +302,15 @@
         body: 'Data berhasil masuk.'
       })
     });
-  })
+  })  
+
+  function logoutModal(){
+        var logout = document.getElementById('logoutLink')
+        logout.href = "/logout"
+        $('#logout').modal('show')
+      }
 </script>
+<!-- Required scripts -->
+@include('sweetalert::alert')
 </body>
 </html>

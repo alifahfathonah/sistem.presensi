@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
+use App\Presensi;
+use App\Posting;
+use PDF;
 
 class presensiController extends Controller
 {
@@ -13,7 +19,16 @@ class presensiController extends Controller
      */
     public function index()
     {
-        return view('pages.back.data-presensi');
+        $id = Posting::orderBy('id', 'DESC')->get()->count();
+        $sesi = Posting::orderBy('id', 'DESC')->get();
+        $data = DB::table('presensi')
+                    ->JOIN('users', 'presensi.user_id', '=', 'users.id')
+                    ->JOIN('post', 'presensi.sesi_id', '=', 'post.id')
+                    ->SELECT('presensi.created_at', 'users.name', 'users.kode_user')
+                    ->where('post.id', '=', $id)->orderBy('presensi.created_at', 'ASC')->get();
+        //$jml = Presensi::get()->where('id','')->count();
+
+        return view('pages.back.data-presensi', ['data'=>$data, 'id'=>$id, 'sesi'=>$sesi]);
     }
 
     /**
@@ -21,11 +36,21 @@ class presensiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function login()
     {
-        //
+        return view('auth.login');
     }
 
+    public function postlogin(Request $req){
+        if (!\Auth::attempt([
+            'no_tlp' => $req['no_tlp'],
+            'password' => $req['password']
+        ])) {
+            return redirect('/presensi');
+        }
+        $id = Posting::get()->count();
+        return redirect('/scan');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +59,31 @@ class presensiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        date_default_timezone_set('Asia/Jakarta');
+        $sesi = Crypt::decryptString($request['sesi_id']);
+        $kd = \Auth::user()->kode_user;
+        $tanda = $kd + $sesi;
+        //dd($sesi);
+        $data = Presensi::create([
+            'user_id' => $request['user_id'],
+            'sesi_id' => $sesi,
+            'tanda' => $tanda,
+        ]);
+        //dd($data);
+        return redirect('/presensi/logout');
+        //return "Berhasil store";
+    }
+
+    public function presensi(){
+        $id = Posting::get()->count(); 
+        $data = Posting::find($id);
+        //dd($data);
+        return view('pages.front.presensi', ['data'=>$data]);
+    }
+
+    public function logout(){
+        \Auth::logout();
+        return redirect('/');
     }
 
     /**
@@ -43,9 +92,16 @@ class presensiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $req)
     {
-        //
+        $id = $req['sesi'];
+        $data = DB::table('presensi')
+                    ->JOIN('users', 'presensi.user_id', '=', 'users.id')
+                    ->JOIN('post', 'presensi.sesi_id', '=', 'post.id')
+                    ->SELECT('presensi.created_at', 'users.*', 'post.*')
+                    ->where('post.id', '=', $id)->orderBy('presensi.created_at', 'ASC')->get();
+
+        return view('pages.back.data-presensi', ['id'=>$id, 'data'=>$data]);
     }
 
     /**
@@ -80,13 +136,25 @@ class presensiController extends Controller
     public function destroy($id)
     {
         //
+    }    
+
+    public function presensikajian(){   
+        $id = Posting::get('id')->count();     
+        $data = DB::table('presensi')
+                    ->JOIN('users', 'presensi.user_id', '=', 'users.id')
+                    ->JOIN('post', 'presensi.sesi_id', '=', 'post.id')
+                    ->SELECT('presensi.created_at', 'users.name', 'users.kode_user')
+                    ->WHERE('post.id', '=', $id)->get();
+
+        return view('pages.back.presensi-kajian', ['data' => $data]);
     }
 
-    public function presensi(){
-        return view('pages.front.presensi');
-    }
+    public function qrcodegenerator(){
+        $id = Posting::get('id')->count();
+        $encrypted = Crypt::encryptString($id);
+        //dd($encrypted);
+        $qr = QrCode::size(350)->generate($encrypted);
 
-    public function presensikajian(){
-        return view('pages.back.presensi-kajian');
+        return view('pages.back.qrcode-presensi', ['qr'=>$qr, 'encrypted'=>$encrypted]);
     }
 }

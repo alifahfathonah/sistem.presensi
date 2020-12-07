@@ -14,7 +14,7 @@
                     </div>
                     
                     <div class="total-work-process d-flex justify-content-around align-items-left">     
-                        <form id="myForm" action="{{ route('login') }}" method="post" class="contact-form">
+                        <form id="myForm" action="/presensi/login" method="post" class="contact-form">
                         @csrf
                         <div class="row justify-content-center">
                             
@@ -47,10 +47,9 @@
                                                                 
                             </div>                                
                                 <button name="kirim" class="primary-btn submit-btn d-inline-flex align-items-center mt-20 mr-20"><span class="mr-10">masuk</span><span class="lnr lnr-arrow-right"></span></button>
-                        </div>
-                        <div class="alert-msg"></div>       
+                        </div>     
+                        </form>                 
                     </div>
-                    </form>                 
                 </div>
             </div>
         </div>

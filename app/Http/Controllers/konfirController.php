@@ -24,7 +24,7 @@ class konfirController extends Controller
                     ->JOIN('users', 'rekap_konfirmasi.user_id', '=', 'users.id')
                     ->JOIN('post', 'rekap_konfirmasi.konfirmasi_id', '=', 'post.id')
                     ->SELECT('rekap_konfirmasi.*', 'users.*', 'post.*')
-                    ->WHERE('post.id', '=', $id)->get();
+                    ->WHERE('post.id', '=', $id)->orderBy('users.name', 'ASC')->get();
         $sum = Konfirmasi::where('konfirmasi_id', $id)->sum('jml');
         //dd($sum);
         return view('pages.back.data-konfirmasi', ['data'=>$data, 'sesi'=>$sesi, 'id'=>$id, 'sum'=>$sum]);
@@ -57,17 +57,17 @@ class konfirController extends Controller
         $id = Posting::get('id')->count();
         $jml = $request['pasangan'] + $request['anak'] + 1;
         $user = \Auth::user()->id;
+        $kd = \Auth::user()->kode_user;
+        $tanda = $id + $kd;
 
-        if ($id==$id && $user==$user) {
-            echo "error";
-        }
         $data = Konfirmasi::create([
             'jml' => $jml,
             'konfirmasi_id' => $id,
-            'user_id' => $user
+            'user_id' => $user,
+            'tanda' => $tanda,
         ]);
         //dd($data);
-        return redirect('/');
+        return redirect('/')->with('success', 'Konfirmasi Selesai');
     }
 
     /**

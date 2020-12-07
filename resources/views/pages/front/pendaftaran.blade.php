@@ -49,10 +49,9 @@
 																
 			                </div>			                      
 								<button name="kirim" class="primary-btn submit-btn d-inline-flex align-items-center mt-20 mr-20"><span class="mr-10">Daftar</span><span class="lnr lnr-arrow-right"></span></button>
-						</div>
-						<div class="alert-msg"></div>		
-					</div>
+						</div>		
 					</form>					
+					</div>
 				</div>
 			</div>
 		</div>

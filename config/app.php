@@ -161,7 +161,12 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        //qrcode generator
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        //DOM PDF
+        Barryvdh\DomPDF\ServiceProvider::class,
+        //sweetaler
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -227,9 +232,13 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
-        //domPDF
+        //qrcode generator
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        //DOM PDF
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        //SweetAlert
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+
 
     ],
 

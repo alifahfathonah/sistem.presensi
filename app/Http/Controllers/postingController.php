@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Storage;
 use App\Posting;
 
 class postingController extends Controller
@@ -26,14 +27,7 @@ class postingController extends Controller
      */
     public function create()
     {
-        $file= $request->file('poster')->store('posters');
-        //dd($file);
-        $data = Posting::create([
-            'sesi' => $request['sesi'],
-            'gambar' => $file
-        ]);
-        //dd($data);
-        return redirect('/posting');
+        //
     }
 
     /**
@@ -44,7 +38,14 @@ class postingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file= $request->file('poster')->store('posters');
+        //dd($file);
+        $data = Posting::create([
+            'sesi' => $request['sesi'],
+            'gambar' => $file
+        ]);
+        //dd($data);
+        return redirect('/posting')->withToastSuccess('Data Berhasil disimpan');
     }
 
     /**
@@ -66,7 +67,9 @@ class postingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Posting::find($id);
+
+        return view('pages.back.edit-kabar-kajian', ['data'=>$data]);
     }
 
     /**
@@ -78,7 +81,18 @@ class postingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Posting::find($id);
+        $file= $request->file('poster')->store('posters');
+        if ($file == '') 
+            $data->update($request->all());
+
+        $data->update([
+            'sesi' => $request['sesi'],
+            'gambar' => $file,
+        ]);
+
+        return redirect('/posting')->withToastSuccess('Data Berhasil diperbarui');
+
     }
 
     /**
@@ -89,6 +103,8 @@ class postingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Posting::find($id);
+        $data->delete();
+        return redirect('/posting')->withToastSuccess('Data Berhasil dihapus');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Peserta;
+use App\Presensi;
 
 class pesertaController extends Controller
 {
@@ -15,7 +16,7 @@ class pesertaController extends Controller
      */
     public function index()
     {
-        $data = Peserta::all();
+        $data = Peserta::where('role', 'user')->get();
         return view('pages.back.data-peserta',['data' => $data]);
     }
 
@@ -54,7 +55,10 @@ class pesertaController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Peserta::find($id);
+        $jml= Presensi::get()->where('user_id', $id)->count();
+        //dd($id);
+        return view('pages.back.detil-user', ['data'=>$data, 'jml'=>$jml]);
     }
 
     /**
@@ -88,6 +92,8 @@ class pesertaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Peserta::find($id);
+        $data->delete();
+        return redirect('/datapeserta')->withToastSuccess('Data Peserta Berhasil dihapus');
     }
 }

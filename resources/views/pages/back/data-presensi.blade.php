@@ -14,49 +14,23 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-      <div class="col-md-7">
-        <!-- table 1 -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Tabel Data Presensi Peserta</h3>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body"> 
-            <table id="example1" class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nama</th>
-                  <th>Jumlah Kehadiran</th>
-                </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>Trident</td>
-                <td>Internet
-                  Explorer 4.0
-                </td>
-                <td>Win 95+</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <!-- /.card-body -->
-        </div>
-          <!-- /.card -->
-      </div>
-        
-      <div class="col-md-5">
+      <div class="col-md-10">
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Tabel Data<br>Presensi/Pertemuan</h3>
             <div class="card-tools">
-              <div class="input-group input-group-sm" style="width: 150px;">                    
-                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                <div class="input-group-append">
-                  <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+              <form method="GET" action="/datapresensi/sesi">
+                <div class="input-group float-right">
+                    <select class="custom-select" name="sesi">
+                      @foreach($sesi as $s)
+                      <option value="{{ $s->id }}" {{ $s->id == $id ? 'selected' : ''}}>{{$s -> sesi}}</option>
+                      @endforeach
+                    </select>
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
           <!-- /.card-header -->
@@ -66,13 +40,17 @@
                 <tr>
                   <th>ID</th>
                   <th>Nama</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
+                @foreach($data as $a)
                 <tr>
-                  <td>183</td>
-                  <td>John Doe</td>
+                  <td>{{ $a->kode_user }}</td>
+                  <td>{{ $a->name }}</td>
+                  <td>{{ $a->created_at }}</td>
                 </tr>                    
+                @endforeach
               </tbody>
             </table>
           </div>

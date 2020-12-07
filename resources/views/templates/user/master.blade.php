@@ -205,5 +205,7 @@
 			    });
 			});		  
 		</script>
+		<!-- Required Scripts -->
+		@include('sweetalert::alert')
 	</body>
 </html>

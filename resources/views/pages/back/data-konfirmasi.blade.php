@@ -15,7 +15,7 @@
     <section class="content">
     <div class="container-fluid">
       <!-- Default box -->
-      <div class="card">
+      <div class="card col-md-10">
         <div class="card-header">
           <h3 class="card-title">Tabel Data Konfirmasi Kehadiran</h3>
           <div class="card-tools">

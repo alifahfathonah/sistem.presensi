@@ -35,18 +35,11 @@ class AuthController extends Controller
             "kode_user" => $kd_user,
             "name" => $request["name"],
             "no_tlp" => $request["no_tlp"],
+            "role" => "user",
             "password" => Hash::make($request["password"])
         ]);
         
         //Alert::success('Berhasil!', 'Data Disimpan');
-        return redirect('/');
-    }
-
-    public function login(){
-    	return view(auth.login);
-    }
-
-    public function postlogin(Request $request){
-    	//
+        return redirect('/')->with('success', 'Pendaftaran Berhasil');
     }
 }

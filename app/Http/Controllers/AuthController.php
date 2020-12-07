@@ -39,7 +39,6 @@ class AuthController extends Controller
             "password" => Hash::make($request["password"])
         ]);
         
-        //Alert::success('Berhasil!', 'Data Disimpan');
         return redirect('/')->with('success', 'Pendaftaran Berhasil');
     }
 }

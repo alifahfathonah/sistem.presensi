@@ -113,9 +113,9 @@
 		<!-- Bootstrap Switch -->
 		<script src="admin/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 		<!-- AdminLTE App -->
-		<script src="admin/dist/js/adminlte.min.js"></script>
+		<script src="admin/js/adminlte.min.js"></script>
 		<!-- AdminLTE for demo purposes -->
-		<script src="admin/dist/js/demo.js"></script>
+		<script src="admin/js/demo.js"></script>
 		<!-- SweetAlert2 -->
 		<script src="admin/plugins/sweetalert2/sweetalert2.min.js"></script>
 		
